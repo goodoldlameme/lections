@@ -4,13 +4,12 @@
 
 > *12.02.2019* 
 
-##### Организационные вопросы
+## Организационные вопросы
 
 * Петрова Елена Александровна [elena.petrova@urfu.ru](mailto:elena.petrova@urfu.ru)
 
 * Консультации: понедельник 16:10 КАДМ
-
-##### Рекомендуемая литература
+## Рекомендуемая литература
 
   - [Языки, грамматики, распознаватели](http://kadm.imkn.urfu.ru/files/shurzam.pdf) (Шур, Замятин) - основной учебник (много багов!)
   - Ахо, Лам, Сети, Ульман "Компиляторы. Принципы, технологии, инструменты" (Dragon book)
@@ -38,7 +37,7 @@
 >
 >К 60-м придумали. Дейкстра - двигатель прогресса, потому что придумал теорию, а не какое-то специфичное для задачи решение.
 
-##### Что такое компилятор? 
+## Что такое компилятор? 
 
 По-простому – переводчик с языка на язык. Можно рассматривать как чёрный ящик с каким-то входом, выходом и магией внутри.
 
@@ -60,7 +59,7 @@
 
 Заниматься будем фронтендом!
 
-##### Блок анализа
+**Блок анализа**
 
 ***
 
@@ -76,7 +75,7 @@
 
 ***
 
-##### Язык 
+## Язык 
 
 1. Лексика ~ слова
 
@@ -218,7 +217,7 @@ id,1   +
 
 На каждой стадии – новый язык. Значит, нужны новые способы порождения\описания. А этот способ порождает распознаватель.
 
-### Иерархия Хомского-Шютценберже
+## Иерархия Хомского-Шютценберже
 
 |      | Вид грамматики           | Распознаватель                                         | Класс языков            |
 | ---- | ------------------------ | ------------------------------------------------------ | ----------------------- |
@@ -263,7 +262,7 @@ $abba : :S \rightarrow aB \rightarrow abS \rightarrow abbA \rightarrow abba $
 
 Иерархия: регулярные $\subset$ КСЯ $\subset$ КЗЯ $\subset$ Rec $\subset$ RecEn[^2].
 
-### Контекстно-свободные грамматики и языки
+## Контекстно-свободные грамматики и языки
 
 Опр. Упорядоченное дерево — дерево с заданным линейным порядком со следующими свойствами:
 
@@ -348,3 +347,239 @@ $F \rightarrow (E) |x$
 2. Левосторонний вывод и l-формы:$E \rightarrow E+T\rightarrow T+T \rightarrow F+T \rightarrow x+T \rightarrow x+T*F \rightarrow x+F*F \rightarrow x+x*F\rightarrow x+x*x $
 
 Плата за однозначность - увеличение длины вывода
+
+> 26.02.2019 
+
+## Праволинейная грамматика
+| A $\rightarrow \alpha B$ | A $\rightarrow \alpha B$ |
+| ------------------------ | :----------------------- |
+| A $\rightarrow \lambda$  | A $\rightarrow$ a        |
+
+_**Теорема**_
+
+Праволинейная грамматика порождает регулярный язык
+
+_Д-во:_
+
+​	$G = (\Sigma, \Gamma, P, S)​$
+
+​	$KA = (\Sigma, \Gamma, \delta, S, F)$
+
+​	$F = {A \in \Gamma | (A \rightarrow \lambda) \in P}$
+
+​	$\delta(A, a) = B <=> (A \rightarrow aB) \in P$
+
+​	A <-a-> B
+
+​	$w = a_1... a_n$
+
+​	$S \rightarrow a_1A_1 \rightarrow a_1a_2A_2 \rightarrow  ...\rightarrow a_1...a_nA_, \rightarrow a_1...a_n$
+
+_Строим автомат по рег. выр-ю_
+
+a(b+cc)*
+
+<svg width="400" height="150" version="1.1" xmlns="http://www.w3.org/2000/svg">
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="118.5" cy="88.5" rx="30" ry="30"/>
+	<text x="112.5" y="94.5" font-family="Times New Roman" font-size="20">S</text>
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="223.5" cy="100.5" rx="30" ry="30"/>
+	<text x="216.5" y="106.5" font-family="Times New Roman" font-size="20">A</text>
+	<ellipse stroke="black" stroke-width="1" fill="none" cx="337.5" cy="88.5" rx="30" ry="30"/>
+	<text x="330.5" y="94.5" font-family="Times New Roman" font-size="20">B</text>
+	<path stroke="black" stroke-width="1" fill="none" d="M 213.439,72.362 A 22.5,22.5 0 1 1 239.714,75.398"/>
+	<text x="228.5" y="23.5" font-family="Times New Roman" font-size="20">b</text>
+	<polygon fill="black" stroke-width="1" points="239.714,75.398 248.809,72.893 241.448,66.125"/>
+	<polygon stroke="black" stroke-width="1" points="148.306,91.906 193.694,97.094"/>
+	<polygon fill="black" stroke-width="1" points="193.694,97.094 186.313,91.218 185.178,101.153"/>
+	<text x="164.5" y="116.5" font-family="Times New Roman" font-size="20">a</text>
+	<polygon stroke="black" stroke-width="1" points="253.335,97.359 307.665,91.641"/>
+	<polygon fill="black" stroke-width="1" points="307.665,91.641 299.185,87.505 300.232,97.451"/>
+	<text x="278.5" y="116.5" font-family="Times New Roman" font-size="20">c</text>
+	<polygon stroke="black" stroke-width="1" points="307.665,91.641 253.335,97.359"/>
+	<polygon fill="black" stroke-width="1" points="253.335,97.359 261.815,101.495 260.768,91.549"/>
+	<text x="274.5" y="84.5" font-family="Times New Roman" font-size="20">c</text>
+</svg>
+
+$S \rightarrow aA​$
+
+$A \rightarrow bA|cB|\lambda​$
+
+$B \rightarrow cA$
+
+### Преобразования грамматик 
+
+Грамматики эквивалентные, если они порождают один и тот же язык.
+
+#### Приведенные грамматики
+
+_Опр:_ Нетерминал A $\in \Gamma$ - производящий, если из него можно получить производящую цепочку $A \Rightarrow _G^* u^- $
+
+_Опр:_ A $\in \Gamma$ - достижимый, если  $A \Rightarrow _G^* \alpha A\beta $
+
+_Опр:_ Грамматика приведенная, если все ее нетерминалы достижимые и производящие
+
+***Примеры***
+
+$S \rightarrow bAc | AcB​$
+
+$A \rightarrow abC​$
+
+$B \rightarrow Ea​$
+
+$C \rightarrow BD​$
+
+$D \rightarrow CCa​$
+
+$E \rightarrow Fbb$
+
+$F \rightarrow a$
+
+$\Gamma_p$ = {F, E, B} - производящие 
+
+$\Gamma_r$ = {S, A, B, C, E, D, F} - достижимые
+
+Нахождение $\Gamma_r: \Gamma_r \rightarrow S​$ -> ~~S~~, A, B -> ~~S~~, ~~A~~, B, C, E -> ~~S~~, ~~A~~, ~~B~~, C, E, D -> ~~S~~, ~~A~~, ~~B~~, ~~C~~, E, D, F
+
+$\Gamma_r^n = \Gamma_r^{n-1} \cup \{A | (B \rightarrow \alpha A\beta) \in P, B \in \Gamma_r^{n-1}\}$
+
+добавляем нетерминалы из правой части
+
+$\Gamma_p: $ все нетерминалы, из которых вывод цепочки за 1 шаг
+
+$\Gamma_p^{n} = \Gamma_p{n-1} \cup \{A | (A \rightarrow \gamma) \in P, \gamma \in (\Sigma \cup \Gamma_p^{n-1})\}​$
+
+**Теорема**
+Для любой КСГ G существует эквивалентная ей приведенная грамматика
+_Д-во:_ 
+	КСГ G = ($\Sigma, \Gamma, P, S$)
+	Находим $\Gamma_p$
+	Если S $\notin \Gamma_p, то G' = (\Sigma, \emptyset, \emptyset, \emptyset)$
+	Иначе $\widetilde{G} = (\Sigma, \Gamma_p, \widetilde{P}, S)$
+	$\widetilde{P} = \{(A \rightarrow \gamma) \in P |A,\gamma \in (\Sigma \cup \Gamma_p)^*\}$
+
+​	Находим $(\Gamma_p)_r$
+
+​	$G' = (\Sigma, (\Gamma_p)_r, P', S)$
+
+​	P' = {$(A \rightarrow \gamma) \in \widetilde{P}| A, \gamma \in (\Sigma \cup (\Gamma_p)|r)^*$}
+
+​	$(\Gamma_p)_p - достижимы\ в\ \widetilde{G}, G', производящие\ в\ \widetilde{G}, G'$
+
+​	$A \in (\Gamma_p)_r​$
+
+​	$S {\Rightarrow}_{\widetilde{G}}^* \lambda AB \Rightarrow_{\widetilde{G'}}^* uwv ​$
+
+**_Пример_**
+
+S $\rightarrow$ ab|bAC
+
+A $\rightarrow$ CB
+
+B $\rightarrow$ aSA
+
+C $\rightarrow​$ bC|d
+
+1) производящие $\rightarrow$ достижимые 
+
+​	$\Gamma_p = \{C, S\}; (\Gamma_p)_r = \{S\}; [G': S \rightarrow ab]$
+
+2) достижимые $\rightarrow$ производящие
+
+​	$\Gamma_p = \{S, A, B, C\}; (\Gamma_p)_r = \{C, S\}; [G': S \rightarrow ab; C \rightarrow d ]​$
+
+#### $\lambda$ - свободные грамматики 
+
+_Опр:_ $A \in \Gamma - аннулируем, если A => ^* \lambda$
+
+Ann(G) - мн-во анн нетерм.
+
+Нахождение аннулирующий символов
+
+$Ann^1(G) = \{A \in \Gamma | (A \rightarrow \lambda) \in P\}$
+
+$Ann^n(G) = Ann^{n-1}(G) \cup \{A \in \Gamma | (A \rightarrow \gamma ) \in P, \gamma \in (Ann^{n-1}(G))^*\}​$
+
+Пример
+
+S $\rightarrow$ aBC|AE
+
+A $\rightarrow$ bC| $\lambda$
+
+B $\rightarrow$ ACA
+
+C $\rightarrow \lambda$
+
+E $\rightarrow$ CA
+
+D $\rightarrow$ bE|c
+
+Ann(G):
+
+1. {A,C}
+2. {A,C, B, E}
+3. {A, B, C, E, S}
+
+_Опр:_ $\lambda​$ - свободная грамматика - грамматика, которая либо не содержит аннулирующих правил вида $(A \rightarrow \lambda)​$, либо содержит единств. такое правило S $\rightarrow \lambda​$ и S не встреч-ся в правых частях правил вывода.
+
+__Теорема__ Любая грамматика эквивалентна некоторой $\lambda$ -свободной грамматике 
+
+_Д-во:_
+
+​	$G = (\Sigma, \Gamma, P, S) - исх., G' = (\Sigma, \Gamma', P', S') - \lambda\ свободная $
+
+0. Если $\lambda \in L(G), то  \Gamma' = \Gamma \cup S', P' = P \cup \{(S' \rightarrow \lambda), (S' \rightarrow S)\}$
+
+​	Иначе $\Gamma = \Gamma'$, S = S', P = P'
+
+1. Построить Ann(G)
+
+   1.5 в \Gamma' = \{A | (A \rightarrow \gamma) \in P, \gamma \neq \lambda\}
+
+2. $\beta \preccurlyeq \gamma​$, если $\beta​$ - подпосл-ть $\gamma​$ и все символы $\gamma​$, которых нет в $\beta​$, аннулирующие.
+
+   P' = $\{(A \rightarrow \beta) | (A \rightarrow \gamma) \in P, \beta \preccurlyeq \gamma, \beta \neq \lambda\}$
+
+L(G) = L(G')
+1. w $\in$ L(G)
+    $S => \alpha_1 => ... => \alpha_{11} = w.$
+    $\alpha_i => \alpha_{i+1}(A \rightarrow \beta) \in P'$
+    			$\Downarrow​$
+
+  $в G\ \exists(A \rightarrow \gamma) \in P, \beta \preccurlyeq \gamma, причем\ \gamma => ^* \beta $
+
+2. w = L(G)	
+
+_Пример_
+
+Отрезаем поддеревья с $\lambda$ на конце. Предок этого поддерева имеет сыновей с непустыми на конце цепочками.
+
+ ![1551174632263](1551174632263.png)
+
+**_Пример_**
+ $S \rightarrow ~~abc~~|aB|~~aC~~|a|A|E|AE$
+
+ $S' \rightarrow S|\lambda$
+
+$A \rightarrow \cancel{bc}|b; B \rightarrow \cancel{ACA}|\cancel{AC}|AA|\cancel{CA}|A|\cancel{C}$
+
+$E \rightarrow A; D \rightarrow bE|b|c$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
