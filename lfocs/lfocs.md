@@ -2485,11 +2485,73 @@ LAST'(S) = {b, c}
 
 $\vdash acaccbb \dashv $
 
-$\vdash acaccbb \dashv $
+$\nabla\vdash acaccbb \dashv $
 
 $\nabla \vdash \lessdot a \lessdot$
 
-<u>тут пропущено</u>
+$\nabla \vdash \lessdot a \lessdot c \gtrdot$
+
+$\nabla \vdash \lessdot a \doteq S \lessdot a \lessdot c \gtrdot$
+
+$\nabla \vdash \lessdot a \doteq S \lessdot a \doteq S \lessdot c \gtrdot$
+
+$\nabla \vdash \lessdot a \doteq S \lessdot a \doteq S \doteq S \doteq b \gtrdot$
+
+$\nabla \vdash \lessdot a \doteq S \doteq S \doteq b \gtrdot$
+
+$\nabla \vdash \lessdot S \gtrdot \dashv$
+
+> введение внешней аксиомы из-за того, что мы читаем только вершину стека
+
+$S' → S$
+
+Попробуем ослабить требования.
+
+"Больше" не пересекается, "меньше или равно" пересечем.
+
+$X \underline{\lessdot} Y$ хотим испытывать самую длинную основу
+
+ <u>_Опр: _</u>G - грамматика слабого предшествования, если она ациклична, обратима и 
+
+​	1) $\not\exists\  X\ и\ Y: X \gtrdot Y\ и\ (X \lessdot Y\ или\ X \doteq Y)$
+
+​	2) $\not\exists\ (A → \beta) \in P, (B → \gamma X\beta), где\ X \doteq A\ или\ X \lessdot A$ 
+
+<u>_Пример:_</u>
+
+​	$E \rightarrow E + T|T$
+
+​	$T \rightarrow T*F|F$
+
+​	$F \rightarrow (E)|X$
+
+|          | E                      | T                      | F          | (          | )         | x          | +         | *         | $\dashv$  |
+| -------- | ---------------------- | ---------------------- | ---------- | ---------- | --------- | ---------- | --------- | --------- | --------- |
+| E        |                        |                        |            |            | $\doteq$  |            | $\doteq$  |           | $\gtrdot$ |
+| T        |                        |                        |            |            | $\gtrdot$ |            | $\gtrdot$ | $\doteq$  | $\gtrdot$ |
+| F        |                        |                        |            |            | $\gtrdot$ |            | $\gtrdot$ | $\gtrdot$ | $\gtrdot$ |
+| (        | $\underline{\lessdot}$ | $\lessdot$             | $\lessdot$ | $\lessdot$ |           | $\lessdot$ |           |           |           |
+| )        |                        |                        |            |            | $\gtrdot$ |            | $\gtrdot$ | $\gtrdot$ | $\gtrdot$ |
+| x        |                        |                        |            |            | $\gtrdot$ |            | $\gtrdot$ | $\gtrdot$ | $\gtrdot$ |
+| +        |                        | $\underline{\lessdot}$ | $\lessdot$ | $\lessdot$ |           | $\lessdot$ |           |           |           |
+| *        |                        |                        | $\doteq$   | $\lessdot$ |           | $\lessdot$ |           |           |           |
+| $\vdash$ | $\lessdot$             | $\lessdot$             | $\lessdot$ | $\lessdot$ |           | $\lessdot$ |           |           |           |
+
+$\vdash x+x*x \dashv$
+
+| $\nabla\vdash \lessdot$                                      | x+x*x      |
+| ------------------------------------------------------------ | ---------- |
+| $\nabla\vdash\lessdot x \gtrdot$                             | +x*x       |
+| $\nabla \vdash \lessdot F \gtrdot$                           | +x*x       |
+| $\nabla \vdash \lessdot T \gtrdot$                           | .          |
+| $\nabla \vdash \lessdot E$                                   | .          |
+| $\nabla \vdash \lessdot E \doteq +$                          | x*x        |
+| $\nabla \vdash \lessdot E \doteq + \lessdot x \gtrdot$       | *x$\dashv$ |
+| $\nabla \vdash \lessdot E \doteq + \lessdot T \doteq *$      | x$\dashv$  |
+| $\nabla \vdash \lessdot E \doteq + \lessdot T \doteq * \lessdot x \gtrdot$ | .          |
+| $\nabla \vdash \lessdot E \doteq + \lessdot T \lessdot * \doteq F \gtrdot$ | .          |
+| $\nabla \vdash \lessdot E \doteq + \lessdot T \gtrdot$       | .          |
+| $\nabla \vdash \lessdot E \gtrdot \dashv$                    | .          |
 
 > 28.05.19.
 
